@@ -22,7 +22,7 @@ public class PessoaController {
     @Autowired
     PessoaService pessoaService;
 
-    @PostMapping("/cadastrar")
+    @PostMapping
     public ResponseEntity createPessoa(@RequestBody @Valid PessoaDTO pessoaDTO){
         try {
             pessoaService.createPessoa(pessoaDTO);

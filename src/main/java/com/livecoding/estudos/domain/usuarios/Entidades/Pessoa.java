@@ -1,13 +1,9 @@
 package com.livecoding.estudos.domain.usuarios.Entidades;
 
 import com.livecoding.estudos.domain.usuarios.DTO.PessoaDTO;
-import com.livecoding.estudos.domain.usuarios.enums.PapelPessoa;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
-
-import javax.naming.Name;
-import java.util.Set;
 
 @Table(name = "pessoa")
 @Entity(name = "pessoa")
@@ -34,17 +30,12 @@ public class Pessoa {
     @Column(name="pessoa_debitado")
     private Float pessoaDebitado;
 
-    @ElementCollection(targetClass = PapelPessoa.class)
-    @CollectionTable( name = "papelpessoa", joinColumns = @JoinColumn(name="pessoa_id"))
-    @Column(name = "papel_pessoa", nullable = false)
-    private Set<PapelPessoa> papelpessoa;
 
     public Pessoa(@Valid PessoaDTO pessoaDTO) {
         this.pessoaNome = pessoaDTO.nome();
         this.pessoaCpf = pessoaDTO.cpf();
         this.pessoaEmail = pessoaDTO.email();
         this.pessoaDebitado = pessoaDTO.debitado();
-        this.papelpessoa = pessoaDTO.papeis();
 
     }
 }

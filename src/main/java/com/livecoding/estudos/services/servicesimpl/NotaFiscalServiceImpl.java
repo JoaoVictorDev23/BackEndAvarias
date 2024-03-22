@@ -14,6 +14,7 @@ import com.livecoding.estudos.services.ServicesInterface.DadosNFDService;
 import com.livecoding.estudos.services.ServicesInterface.NotaFiscalService;
 import com.livecoding.estudos.services.ServicesInterface.ProdutoService;
 import com.livecoding.estudos.services.ServicesInterface.ValoresNfdService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,6 +100,31 @@ public class NotaFiscalServiceImpl implements NotaFiscalService {
         return notaFiscalDTOList;
     }
 
+    @Override
+    public List<CriarNotaFiscalDTO> findAll() {
+        String emailUsuario = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        List<DadosNFD> dadosNFDList = dadosNFDRepository.findAllByCadastradoPor(emailUsuario);
+
+        List<CriarNotaFiscalDTO> criarNotaFiscalDTOList = new ArrayList<>();
+
+        for (DadosNFD dadosNFD : dadosNFDList) {
+            DadosNfdDTO dadosNfdDTO = new DadosNfdDTO(dadosNFD); // Preencha com os dados necessários
+            ValoresNFD valoresNfd = valoresNFDRepository.findByNumeronfd(dadosNFD.getNumeroNfd());
+            ValoresNFDDTO valoresNFDDTO = new ValoresNFDDTO(valoresNfd);
+
+            List<ProdutosDTO> produtosDTOList = new ArrayList<>();
+            List<Produtos> produtosList = produtosRepository.findAllByNumeronfd(dadosNFD.getNumeroNfd());
+            for (Produtos produto : produtosList) {
+                ProdutosDTO produtosDTO = new ProdutosDTO(produto); // Preencha com os dados necessários
+                produtosDTOList.add(produtosDTO);
+            }
+
+            CriarNotaFiscalDTO criarNotaFiscalDTO = new CriarNotaFiscalDTO(dadosNfdDTO, produtosDTOList, valoresNFDDTO);
+            criarNotaFiscalDTOList.add(criarNotaFiscalDTO);
+        }
+        return criarNotaFiscalDTOList;
+    }
 
 
 }

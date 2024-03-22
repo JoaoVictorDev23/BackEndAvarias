@@ -32,5 +32,15 @@ public class NotaFiscalControllers {
         List<CriarNotaFiscalDTO> notasFiscais = notaFiscalService.getAllNotasFiscais();
         return ResponseEntity.ok(notasFiscais);
     }
+    @GetMapping("/listar")
+    public ResponseEntity<List<CriarNotaFiscalDTO>> listarNotasFiscais() {
+        List<CriarNotaFiscalDTO> notasFiscais = notaFiscalService.findAll(); // Supondo que o método findAll retorne a lista de CriarNotaFiscalDTO
+
+        if (notasFiscais.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(notasFiscais);
+        }
+    }
 
 }

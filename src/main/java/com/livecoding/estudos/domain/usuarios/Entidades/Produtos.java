@@ -38,8 +38,8 @@ public class Produtos {
 
     public Produtos(@Valid ProdutosDTO produtosDTO){
         this.nomeProduto = produtosDTO.produtoNome();
-        this.valorProduto = produtosDTO.valorProduto();
-        this.quantidadeProduto = produtosDTO.quantidadeProduto();
+        this.valorProduto = produtosDTO.produtoValor();
+        this.quantidadeProduto = produtosDTO.produtoQuantidade();
         this.situacaoProduto = produtosDTO.situacaoProduto();
         this.numeronfd = produtosDTO.numeronfd();
         this.armazemId = produtosDTO.armazemId();

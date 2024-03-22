@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 
@@ -37,10 +38,9 @@ public class Usuario implements UserDetails {
     @Column(name = "cpf")
     private String cpf;
 
-    @ElementCollection(targetClass = perfis.class)
-    @CollectionTable(name = "usuario_perfis", joinColumns = @JoinColumn(name = "usuario_id"))
+    @Enumerated(EnumType.STRING)
     @Column(name = "perfil", nullable = false)
-    private Set<perfis> perfis;
+    private perfis perfis;
 
     public Usuario(@Valid UsuarioDTO requestUsuario){
         this.name = requestUsuario.name();
@@ -49,7 +49,7 @@ public class Usuario implements UserDetails {
         this.perfis= requestUsuario.perfis();
         this.cpf= requestUsuario.cpf();
     }
-    public Usuario(String email, String senha,Set<perfis> perfil){
+    public Usuario(String email, String senha,perfis perfil){
         this.email = email;
         this.senha = senha;
         this.perfis = perfil;

@@ -7,8 +7,8 @@ public record ProdutosDTO(
 
         String produtosId,
         @NotNull String produtoNome,
-        @NotNull Float valorProduto,
-        @NotNull Float quantidadeProduto,
+        @NotNull Float produtoValor,
+        @NotNull Float produtoQuantidade,
         @NotNull String situacaoProduto,
 
         @NotNull String numeronfd,

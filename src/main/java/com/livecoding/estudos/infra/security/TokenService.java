@@ -25,7 +25,7 @@ public class TokenService {
                     .withIssuer("auth-api")
                     .withSubject(user.getEmail())
                     .withClaim("name", user.getName())
-                    .withClaim("profiles", user.getPerfis().stream().map(perfil -> perfil.getDescricao()).collect(Collectors.toList()))
+                    .withClaim("profiles", user.getPerfis().getCodigo())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
 

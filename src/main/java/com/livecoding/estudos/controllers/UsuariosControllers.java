@@ -1,5 +1,6 @@
 package com.livecoding.estudos.controllers;
 
+import com.livecoding.estudos.Errors.ErrorResponse;
 import com.livecoding.estudos.domain.usuarios.Entidades.Usuario;
 
 import com.livecoding.estudos.domain.usuarios.DTO.UsuarioDTO;
@@ -32,7 +33,10 @@ public class UsuariosControllers {
     }
     @PostMapping
     public ResponseEntity createUsers(@RequestBody @Valid UsuarioDTO user ){
-        if(this.repository.findByEmail(user.email())!= null) return ResponseEntity.badRequest().build();
+        if (this.repository.findByEmail(user.email()) != null) {
+            ErrorResponse errorResponse = new ErrorResponse("Usuário já existe!");
+            return ResponseEntity.badRequest().body(errorResponse);
+    }
         String encryptedPassword = new BCryptPasswordEncoder().encode(user.senha());
         Usuario newUsuario = new Usuario(user);
         newUsuario.setSenha(encryptedPassword);

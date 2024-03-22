@@ -48,9 +48,9 @@ public class DadosNFD {
     @Column(name = "atualizado_por")
     private String atualizadoPor;
 
-    @ManyToOne
-    @JoinColumn(name = "motivo_id")
-    private Motivo motivo;
+
+    @Column(name = "motivo_id")
+    private Integer motivo;
 
 
 

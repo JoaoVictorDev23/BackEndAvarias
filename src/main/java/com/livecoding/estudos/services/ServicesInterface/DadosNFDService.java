@@ -8,4 +8,7 @@ public interface DadosNFDService {
 
     void createDados(DadosNfdDTO dadosNfdDTO);
     DadosNfdDTO updateDadosNfd(DadosNfdDTO dadosNfdDTO);
+
+
+
 }

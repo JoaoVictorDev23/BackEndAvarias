@@ -35,8 +35,8 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET, "/notafiscais/listar").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/chat").permitAll()
                         .requestMatchers(HttpMethod.POST,"/usuarios/criar-primeiro-usuario").permitAll()
                         .anyRequest().authenticated()
                 )

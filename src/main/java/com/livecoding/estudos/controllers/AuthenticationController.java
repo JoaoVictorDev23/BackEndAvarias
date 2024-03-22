@@ -40,10 +40,7 @@ public class AuthenticationController {
         response.put("name", user.getName());
 
         // Obter todos os códigos de perfil
-        Set<String> perfilCodigos = user.getPerfis().stream()
-                .map(perfil -> perfil.getCodigo())
-                .collect(Collectors.toSet());
-
+        String perfilCodigos = user.getPerfis().getCodigo();
         response.put("perfilCodigos", perfilCodigos);
 
         return ResponseEntity.ok(response);
