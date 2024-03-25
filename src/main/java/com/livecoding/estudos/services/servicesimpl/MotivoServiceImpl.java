@@ -1,14 +1,18 @@
 package com.livecoding.estudos.services.servicesimpl;
 
+import com.livecoding.estudos.domain.usuarios.DTO.ClienteDTO;
 import com.livecoding.estudos.domain.usuarios.DTO.MotivosDto;
+import com.livecoding.estudos.domain.usuarios.Entidades.Cliente;
 import com.livecoding.estudos.domain.usuarios.Entidades.Motivo;
 import com.livecoding.estudos.domain.usuarios.repositories.MotivoRepository;
 import com.livecoding.estudos.services.ServicesInterface.MotivoService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -46,6 +50,15 @@ public class MotivoServiceImpl implements MotivoService {
                 .map(MotivosDto::new)
                 .collect(Collectors.toList());
     }
+
+
+    @Override
+    public MotivosDto findById(String id){
+        Optional<Motivo> Optionalmotivo = motivoRepository.findById(id);
+        Motivo motivo = Optionalmotivo.orElseThrow(()-> new EntityNotFoundException("Motivo inexistente."));
+        return new MotivosDto(motivo);
+    }
+
 
 
 }

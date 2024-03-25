@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -93,6 +94,20 @@ public class UsuariosControllers {
         newUsuario.setSenha(encryptedPassword);
         repository.save(newUsuario);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<UsuarioDTO> getUserByEmail() {
+        String emailUsuario = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        Usuario usuario = (Usuario) repository.findByEmail(emailUsuario);
+
+        if (usuario != null) {
+            UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
+            return ResponseEntity.ok(usuarioDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

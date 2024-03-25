@@ -1,7 +1,10 @@
 package com.livecoding.estudos.services.ServicesInterface;
 
+import com.livecoding.estudos.domain.usuarios.DTO.CriarNotaFiscalDTO;
 import com.livecoding.estudos.domain.usuarios.DTO.ValoresNFDDTO;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface ValoresNfdService {
@@ -10,5 +13,8 @@ public interface ValoresNfdService {
     ValoresNFDDTO updateValoresNfd(ValoresNFDDTO valoresNFDDTO);
 
     ValoresNFDDTO findByValores(String id);
+    List<CriarNotaFiscalDTO> findAll(Integer armazemId);
+    void updateSituacao(String id, String situacao);
+
 
 }

@@ -38,12 +38,10 @@ public class DadosNFDServiceImpl implements DadosNFDService {
         if (optionalDadosNFD.isPresent()) {
             DadosNFD dadosNFD = optionalDadosNFD.get();
 
-            dadosNFD.setFilial(dadosNfdDTO.filial());
-            dadosNFD.setSerie(dadosNfdDTO.serie());
-            dadosNFD.setCte(dadosNfdDTO.cte());
-            dadosNFD.setObservacao(dadosNfdDTO.observacao());
-            dadosNFD.setSituacao(dadosNFD.getSituacao());
-;
+            dadosNFD.setMotivo(dadosNfdDTO.motivo());
+            dadosNFD.setSituacao("Pendente");
+
+
             // Log user que Atualizou:
             String emailUsuario = SecurityContextHolder.getContext().getAuthentication().getName();
             dadosNFD.setAtualizadoPor(emailUsuario);
@@ -52,6 +50,20 @@ public class DadosNFDServiceImpl implements DadosNFDService {
             return new DadosNfdDTO(updatedDadosNFD);
         } else {
             throw new RuntimeException("!ERRO! Entre em Contato com o Administrador!");
+        }
+    }
+
+    @Override
+    @Transactional
+    public void updateSituacao(String id, String situacao) {
+        try {
+            DadosNFD dadosNfd = dadosNFDRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("DadosNFD não encontrado com o ID: " + id));
+            dadosNfd.setSituacao(situacao);
+            // Outros campos podem ser atualizados aqui, se necessário
+            dadosNFDRepository.save(dadosNfd);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("!ERRO! Ocorreu um erro ao atualizar a situação do DadosNFD: " + e.getMessage());
         }
     }
 

@@ -1,6 +1,7 @@
 package com.livecoding.estudos.controllers;
 
 import com.livecoding.estudos.Errors.ErrorResponse;
+import com.livecoding.estudos.domain.usuarios.DTO.ClienteDTO;
 import com.livecoding.estudos.domain.usuarios.DTO.MotivosDto;
 import com.livecoding.estudos.domain.usuarios.Entidades.Motivo;
 import com.livecoding.estudos.domain.usuarios.repositories.MotivoRepository;
@@ -46,6 +47,15 @@ public class MotivoControllers {
     public ResponseEntity deleteMotivo(@PathVariable String id) {
         motivoService.deleteMotivo(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<MotivosDto> findById(@PathVariable String id) {
+        MotivosDto MotivosDto = motivoService.findById(id);
+        if (MotivosDto != null) {
+            return ResponseEntity.ok(MotivosDto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

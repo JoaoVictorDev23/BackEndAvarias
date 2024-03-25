@@ -8,13 +8,13 @@ public record ClienteDTO(
         Integer id,
         String nome,
         String cnpj,
-        Float valorDebitado,
+        Float debitado,
 
        String cadastradorPor
 ) {
 
     public ClienteDTO(Cliente cliente) {
         this(cliente.getCliente_id(),cliente.getCliente_nome(), cliente.getClienteCnpj(),
-                cliente.getCliente_debitado(), cliente.getCadastradorPor());
+                cliente.getDebitado(), cliente.getCadastradorPor());
     }
 }

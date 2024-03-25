@@ -8,7 +8,7 @@ public interface DadosNFDService {
 
     void createDados(DadosNfdDTO dadosNfdDTO);
     DadosNfdDTO updateDadosNfd(DadosNfdDTO dadosNfdDTO);
-
+    void updateSituacao(String id, String situacao);
 
 
 }

@@ -15,4 +15,6 @@ public interface MotoristaService {
     MotoristaDTO findByMotorista(String id);
 
     void deleteMotorista(String id);
+    void updateDebitado(String id, Float debitado);
+
 }

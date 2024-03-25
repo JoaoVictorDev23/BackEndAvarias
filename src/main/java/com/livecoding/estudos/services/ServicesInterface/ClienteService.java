@@ -11,4 +11,7 @@ public interface ClienteService {
     void createCliente(ClienteDTO clienteDTO);
     List<ClienteDTO> findAllCliente();
 
+    ClienteDTO findById(String id);
+    void updateDebitado(String id, Float debitado);
+
 }

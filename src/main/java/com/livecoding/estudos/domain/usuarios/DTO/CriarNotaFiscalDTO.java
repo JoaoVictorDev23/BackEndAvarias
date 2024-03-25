@@ -9,7 +9,7 @@ import java.util.List;
 public record CriarNotaFiscalDTO(
 
         @NotNull DadosNfdDTO dadosNfdDTO,
-        @NotNull List<ProdutosDTO> produtosDTO,
+        List<ProdutosDTO> produtosDTO,
 
         @NotNull ValoresNFDDTO valoresDTO
 

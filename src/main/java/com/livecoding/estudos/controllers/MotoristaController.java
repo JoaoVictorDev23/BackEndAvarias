@@ -8,6 +8,7 @@ import com.livecoding.estudos.services.ServicesInterface.MotoristaService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +41,7 @@ public class MotoristaController {
         return ResponseEntity.ok(allMotoristasDto);
     }
 
-    @GetMapping("listar/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<MotoristaDTO> findByMotorista(@PathVariable String id) {
         MotoristaDTO motoristaDTO = motoristaService.findByMotorista(id);
         return ResponseEntity.ok(motoristaDTO);
@@ -53,6 +54,16 @@ public class MotoristaController {
             return ResponseEntity.ok().build();
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
+        }
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateDebitado(@PathVariable String id, @RequestBody Float debitado) {
+        try {
+            motoristaService.updateDebitado(id, debitado);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("!ERRO! Ocorreu um erro ao atualizar o débito do cliente: " + e.getMessage());
         }
     }
 }

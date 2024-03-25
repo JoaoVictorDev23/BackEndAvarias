@@ -12,6 +12,8 @@ public interface NotaFiscalService {
 
     List<CriarNotaFiscalDTO> getAllNotasFiscais();
 
-    List<CriarNotaFiscalDTO> findAll();
+    List<CriarNotaFiscalDTO> findAllByEmail();
+
+    List<CriarNotaFiscalDTO> findAlls();
 
 }

@@ -30,5 +30,17 @@ public class DadosNFDControllers {
         }
 
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateSituacao(@PathVariable String id, @RequestBody String situacao) {
+        dadosNFDService.updateSituacao(id, situacao);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@RequestBody DadosNfdDTO dadosNfdDTO) {
+        dadosNFDService.updateDadosNfd(dadosNfdDTO);
+        return ResponseEntity.ok().build();
+    }
+
 
 }

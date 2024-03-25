@@ -22,5 +22,6 @@ public interface MotivoService {
 
     List<MotivosDto> findAllMotivo();
 
+    MotivosDto findById(String id);
 
 }

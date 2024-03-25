@@ -101,10 +101,35 @@ public class NotaFiscalServiceImpl implements NotaFiscalService {
     }
 
     @Override
-    public List<CriarNotaFiscalDTO> findAll() {
+    public List<CriarNotaFiscalDTO> findAllByEmail() {
         String emailUsuario = SecurityContextHolder.getContext().getAuthentication().getName();
 
         List<DadosNFD> dadosNFDList = dadosNFDRepository.findAllByCadastradoPor(emailUsuario);
+
+        List<CriarNotaFiscalDTO> criarNotaFiscalDTOList = new ArrayList<>();
+
+        for (DadosNFD dadosNFD : dadosNFDList) {
+            DadosNfdDTO dadosNfdDTO = new DadosNfdDTO(dadosNFD); // Preencha com os dados necessários
+            ValoresNFD valoresNfd = valoresNFDRepository.findByNumeronfd(dadosNFD.getNumeroNfd());
+            ValoresNFDDTO valoresNFDDTO = new ValoresNFDDTO(valoresNfd);
+
+            List<ProdutosDTO> produtosDTOList = new ArrayList<>();
+            List<Produtos> produtosList = produtosRepository.findAllByNumeronfd(dadosNFD.getNumeroNfd());
+            for (Produtos produto : produtosList) {
+                ProdutosDTO produtosDTO = new ProdutosDTO(produto); // Preencha com os dados necessários
+                produtosDTOList.add(produtosDTO);
+            }
+
+            CriarNotaFiscalDTO criarNotaFiscalDTO = new CriarNotaFiscalDTO(dadosNfdDTO, produtosDTOList, valoresNFDDTO);
+            criarNotaFiscalDTOList.add(criarNotaFiscalDTO);
+        }
+        return criarNotaFiscalDTOList;
+    }
+
+    @Override
+    public List<CriarNotaFiscalDTO> findAlls() {
+
+        List<DadosNFD> dadosNFDList = dadosNFDRepository.findAll();
 
         List<CriarNotaFiscalDTO> criarNotaFiscalDTOList = new ArrayList<>();
 

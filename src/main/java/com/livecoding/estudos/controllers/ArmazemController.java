@@ -27,7 +27,8 @@ public class ArmazemController {
         return ResponseEntity.ok(armazensDTO);
     }
 
-    @PostMapping("/cadastrar")
+
+    @PostMapping
     public ResponseEntity<?> createArmazens(@RequestBody @Valid ArmazemDTO armazemDTO) {
 
         try {
@@ -45,4 +46,5 @@ public class ArmazemController {
         armazemService.deleteArmazem(id);
         return ResponseEntity.noContent().build();
     }
+
 }

@@ -2,6 +2,7 @@ package com.livecoding.estudos.services.servicesimpl;
 
 import com.livecoding.estudos.Errors.ErrorResponse;
 import com.livecoding.estudos.domain.usuarios.DTO.MotoristaDTO;
+import com.livecoding.estudos.domain.usuarios.Entidades.Cliente;
 import com.livecoding.estudos.domain.usuarios.Entidades.Motorista;
 import com.livecoding.estudos.domain.usuarios.repositories.MotoristaRepository;
 import com.livecoding.estudos.services.ServicesInterface.MotoristaService;
@@ -55,4 +56,17 @@ public class MotoristaServiceImpl implements MotoristaService {
                 .map(MotoristaDTO::new)
                 .collect(Collectors.toList());
     }
+    @Override
+    public void updateDebitado(String id, Float debitado) {
+        try {
+            Motorista OptionalMotorista = motoristaRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Motorista não encontrado com o ID: " + id));
+            OptionalMotorista.setMotoristaDebitado(debitado);
+            // Outros campos podem ser atualizados aqui, se necessário
+            motoristaRepository.save(OptionalMotorista);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("!ERRO! Ocorreu um erro ao atualizar!" + e.getMessage());
+        }
+    }
+
 }

@@ -40,7 +40,7 @@ public class PessoaController {
         return ResponseEntity.ok(allPessoasDto);
     }
 
-    @GetMapping("listar/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PessoaDTO> findByPessoa(@PathVariable String id) {
         PessoaDTO pessoaDTO = pessoaService.findByPessoa(id);
         return ResponseEntity.ok(pessoaDTO);
