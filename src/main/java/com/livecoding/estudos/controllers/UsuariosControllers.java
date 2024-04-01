@@ -54,7 +54,9 @@ public class UsuariosControllers {
             Usuario usuario = optionalUsuario.get();
             usuario.setName(user.name());
             usuario.setEmail(user.email());
-            usuario.setSenha(user.senha());
+            String encryptedPassword = new BCryptPasswordEncoder().encode(user.senha());
+
+            usuario.setSenha(encryptedPassword);
             usuario.setPerfis(user.perfis());
             return ResponseEntity.ok(usuario);
         }

@@ -12,10 +12,9 @@ public record MotoristaDTO(
         @NotNull String email,
 
         @NotNull String cpf,
-        String cadastradoPor,
-        @NotNull Float debitado
+        String cadastradoPor
 ) {
     public MotoristaDTO(Motorista motorista) {
-        this(motorista.getMotoristaId(), motorista.getMotoristaNome(),motorista.getMotoristaCpf(),motorista.getMotoristaEmail(),motorista.getCadastradorPor(),motorista.getMotoristaDebitado());
+        this(motorista.getMotoristaId(), motorista.getMotoristaNome(),motorista.getMotoristaCpf(),motorista.getMotoristaEmail(),motorista.getCadastradorPor());
     }
 }

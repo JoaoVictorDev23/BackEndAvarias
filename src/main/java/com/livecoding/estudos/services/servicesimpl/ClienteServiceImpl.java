@@ -57,7 +57,6 @@ public class ClienteServiceImpl implements ClienteService {
         try {
             Cliente Optionalcliente = clienteRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Cliente não encontrado com o ID: " + id));
-            Optionalcliente.setDebitado(debitado);
             // Outros campos podem ser atualizados aqui, se necessário
             clienteRepository.save(Optionalcliente);
         } catch (RuntimeException e) {

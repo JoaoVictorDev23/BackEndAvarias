@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,11 +22,18 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 
     @Override
     public void createChatMessage(ChatMessageDTO chatMessageDTO) {
+        // Obter a data e hora atuais
+        LocalDateTime dataHoraAtual = LocalDateTime.now();
+
+
+
 
         ChatMessage chatMessage = new ChatMessage(chatMessageDTO);
         String emailUsuario = SecurityContextHolder.getContext().getAuthentication().getName();
 
         chatMessage.setUserVinculado(emailUsuario);
+        // Atribuir a data e hora atuais ao objeto ChatMessage
+        chatMessage.setDatahora(dataHoraAtual);
 
         chatMessageRepository.save(chatMessage);
 

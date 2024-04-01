@@ -61,7 +61,6 @@ public class MotoristaServiceImpl implements MotoristaService {
         try {
             Motorista OptionalMotorista = motoristaRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Motorista não encontrado com o ID: " + id));
-            OptionalMotorista.setMotoristaDebitado(debitado);
             // Outros campos podem ser atualizados aqui, se necessário
             motoristaRepository.save(OptionalMotorista);
         } catch (RuntimeException e) {

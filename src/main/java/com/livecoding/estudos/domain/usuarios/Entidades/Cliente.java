@@ -23,14 +23,11 @@ public class Cliente {
     private String cliente_nome;
     @Column(name="cliente_cnpj")
     private String clienteCnpj;
-    @Column(name="valor_debitado")
-    private Float debitado;
     @Column(name="cadastrado_por")
     private String cadastradorPor;
 
     public Cliente(@Valid ClienteDTO clientedto){
         this.clienteCnpj = clientedto.cnpj();
         this.cliente_nome = clientedto.nome();
-        this.debitado = clientedto.debitado();
     }
 }

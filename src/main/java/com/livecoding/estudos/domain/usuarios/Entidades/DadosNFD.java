@@ -52,6 +52,9 @@ public class DadosNFD {
     @Column(name = "motivo_id")
     private Integer motivo;
 
+    @Column(name = "status_nota")
+    private String status;
+
 
 
     public DadosNFD(@Valid DadosNfdDTO dadosNfdDTO){
@@ -65,5 +68,6 @@ public class DadosNFD {
         this.cadastradoPor = dadosNfdDTO.cadastradoPor();
         this.atualizadoPor = dadosNfdDTO.atualizadoPor();
         this.motivo = dadosNfdDTO.motivo();
+        this.status = dadosNfdDTO.status();
     }
 }

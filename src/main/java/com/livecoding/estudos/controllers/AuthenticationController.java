@@ -5,9 +5,12 @@ import com.livecoding.estudos.domain.usuarios.Entidades.Usuario;
 import com.livecoding.estudos.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -28,22 +31,30 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody @Valid AuthenticationDTO usuario) {
-        var usernamepassword = new UsernamePasswordAuthenticationToken(usuario.email(), usuario.senha());
-        var auth = this.authenticationManager.authenticate(usernamepassword);
+    public ResponseEntity<?> login(@RequestBody @Valid AuthenticationDTO usuario) {
+        try {
+            var usernamepassword = new UsernamePasswordAuthenticationToken(usuario.email(), usuario.senha());
+            var auth = this.authenticationManager.authenticate(usernamepassword);
 
-        var user = (Usuario) auth.getPrincipal();
-        var token = tokenService.generateToken(user);
+            var user = (Usuario) auth.getPrincipal();
+            var token = tokenService.generateToken(user);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("token", token);
-        response.put("name", user.getName());
+            Map<String, Object> response = new HashMap<>();
+            response.put("token", token);
+            response.put("name", user.getName());
 
-        // Obter todos os códigos de perfil
-        String perfilCodigos = user.getPerfis().getCodigo();
-        response.put("perfilCodigos", perfilCodigos);
+            // Obter todos os códigos de perfil
+            String perfilCodigos = user.getPerfis().getCodigo();
+            response.put("perfilCodigos", perfilCodigos);
 
-        return ResponseEntity.ok(response);
+            return ResponseEntity.ok(response);
+        } catch (BadCredentialsException e) {
+            // Tratar a exceção de credenciais inválidas aqui
+            return ResponseEntity.badRequest().body("Verifique suas credencias!");
+        } catch (AuthenticationException e) {
+            // Tratar outras falhas de autenticação aqui
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Falha na autenticação: " + e.getMessage());
+        }
     }
 
 

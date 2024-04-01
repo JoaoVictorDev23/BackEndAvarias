@@ -1,0 +1,1 @@
+alter table dadosnfd add status_nota VARCHAR(255);

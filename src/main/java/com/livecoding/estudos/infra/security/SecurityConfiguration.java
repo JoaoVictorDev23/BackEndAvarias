@@ -56,7 +56,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://192.168.100.127:4200")
+                .allowedOrigins("http://192.168.100.127:4200","http://192.168.0.17:4200","http://avarias.tdm.local:4200")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("Content-Type", "Authorization")
                 .allowCredentials(true)

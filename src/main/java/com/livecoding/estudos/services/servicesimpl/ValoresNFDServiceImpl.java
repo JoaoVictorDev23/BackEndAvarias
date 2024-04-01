@@ -64,6 +64,8 @@ public class ValoresNFDServiceImpl implements ValoresNfdService {
             valoresNFD.setMotorista(valoresNFDDTO.motorista());
             valoresNFD.setComprador(valoresNFDDTO.comprador());
             valoresNFD.setCliente(valoresNFDDTO.cliente());
+            valoresNFD.setDebitadoCliente(valoresNFDDTO.debitadoCliente());
+            valoresNFD.setDebitadoMotorista(valoresNFDDTO.debitadoMotorista());
 
             //Log user que Atualizou:
             String emailUsuario = SecurityContextHolder.getContext().getAuthentication().getName();

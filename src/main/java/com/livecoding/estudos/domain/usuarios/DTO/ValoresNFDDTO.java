@@ -19,14 +19,17 @@ public record ValoresNFDDTO(
         Integer cliente,
         String cadastradoPor,
         String atualizadoPor,
-        String numeronfd
+        String numeronfd,
+        Float debitadoCliente,
+        Float debitadoMotorista
 
 ) {
     public ValoresNFDDTO(ValoresNFD valoresNFD){
         this(valoresNFD.getValoresNFDID(), valoresNFD.getValorVenda(), valoresNFD.getValorPrejuizo(),
          valoresNFD.getValorArmazem(), valoresNFD.getSituacaoValores(),valoresNFD.getArmazem()
         ,valoresNFD.getMotorista(),valoresNFD.getComprador(),valoresNFD.getCliente()
-        , valoresNFD.getCadastradoPor(), valoresNFD.getAtualizadoPor(), valoresNFD.getNumeronfd());
+        , valoresNFD.getCadastradoPor(), valoresNFD.getAtualizadoPor(), valoresNFD.getNumeronfd(),
+                valoresNFD.getDebitadoCliente(), valoresNFD.getDebitadoMotorista());
     }
 
 }

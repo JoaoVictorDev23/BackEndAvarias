@@ -111,20 +111,24 @@ public class NotaFiscalServiceImpl implements NotaFiscalService {
         for (DadosNFD dadosNFD : dadosNFDList) {
             DadosNfdDTO dadosNfdDTO = new DadosNfdDTO(dadosNFD); // Preencha com os dados necessários
             ValoresNFD valoresNfd = valoresNFDRepository.findByNumeronfd(dadosNFD.getNumeroNfd());
-            ValoresNFDDTO valoresNFDDTO = new ValoresNFDDTO(valoresNfd);
 
-            List<ProdutosDTO> produtosDTOList = new ArrayList<>();
-            List<Produtos> produtosList = produtosRepository.findAllByNumeronfd(dadosNFD.getNumeroNfd());
-            for (Produtos produto : produtosList) {
-                ProdutosDTO produtosDTO = new ProdutosDTO(produto); // Preencha com os dados necessários
-                produtosDTOList.add(produtosDTO);
+            if (valoresNfd != null) {
+                ValoresNFDDTO valoresNFDDTO = new ValoresNFDDTO(valoresNfd);
+
+                List<ProdutosDTO> produtosDTOList = new ArrayList<>();
+                List<Produtos> produtosList = produtosRepository.findAllByNumeronfd(dadosNFD.getNumeroNfd());
+                for (Produtos produto : produtosList) {
+                    ProdutosDTO produtosDTO = new ProdutosDTO(produto); // Preencha com os dados necessários
+                    produtosDTOList.add(produtosDTO);
+                }
+
+                CriarNotaFiscalDTO criarNotaFiscalDTO = new CriarNotaFiscalDTO(dadosNfdDTO, produtosDTOList, valoresNFDDTO);
+                criarNotaFiscalDTOList.add(criarNotaFiscalDTO);
             }
-
-            CriarNotaFiscalDTO criarNotaFiscalDTO = new CriarNotaFiscalDTO(dadosNfdDTO, produtosDTOList, valoresNFDDTO);
-            criarNotaFiscalDTOList.add(criarNotaFiscalDTO);
         }
         return criarNotaFiscalDTOList;
     }
+
 
     @Override
     public List<CriarNotaFiscalDTO> findAlls() {
@@ -136,20 +140,24 @@ public class NotaFiscalServiceImpl implements NotaFiscalService {
         for (DadosNFD dadosNFD : dadosNFDList) {
             DadosNfdDTO dadosNfdDTO = new DadosNfdDTO(dadosNFD); // Preencha com os dados necessários
             ValoresNFD valoresNfd = valoresNFDRepository.findByNumeronfd(dadosNFD.getNumeroNfd());
-            ValoresNFDDTO valoresNFDDTO = new ValoresNFDDTO(valoresNfd);
 
-            List<ProdutosDTO> produtosDTOList = new ArrayList<>();
-            List<Produtos> produtosList = produtosRepository.findAllByNumeronfd(dadosNFD.getNumeroNfd());
-            for (Produtos produto : produtosList) {
-                ProdutosDTO produtosDTO = new ProdutosDTO(produto); // Preencha com os dados necessários
-                produtosDTOList.add(produtosDTO);
+            if (valoresNfd != null) {
+                ValoresNFDDTO valoresNFDDTO = new ValoresNFDDTO(valoresNfd);
+
+                List<ProdutosDTO> produtosDTOList = new ArrayList<>();
+                List<Produtos> produtosList = produtosRepository.findAllByNumeronfd(dadosNFD.getNumeroNfd());
+                for (Produtos produto : produtosList) {
+                    ProdutosDTO produtosDTO = new ProdutosDTO(produto); // Preencha com os dados necessários
+                    produtosDTOList.add(produtosDTO);
+                }
+
+                CriarNotaFiscalDTO criarNotaFiscalDTO = new CriarNotaFiscalDTO(dadosNfdDTO, produtosDTOList, valoresNFDDTO);
+                criarNotaFiscalDTOList.add(criarNotaFiscalDTO);
             }
-
-            CriarNotaFiscalDTO criarNotaFiscalDTO = new CriarNotaFiscalDTO(dadosNfdDTO, produtosDTOList, valoresNFDDTO);
-            criarNotaFiscalDTOList.add(criarNotaFiscalDTO);
         }
         return criarNotaFiscalDTOList;
     }
+
 
 
 }

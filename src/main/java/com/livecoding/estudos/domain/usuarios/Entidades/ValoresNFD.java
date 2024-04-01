@@ -52,6 +52,13 @@ public class ValoresNFD {
     @Column(name = "valores_nfd")
     private String numeronfd;
 
+
+
+    @Column(name="debitado_cliente")
+    private Float debitadoCliente;
+    @Column(name="debitado_motorista")
+    private Float debitadoMotorista;
+
     public ValoresNFD(@Valid ValoresNFDDTO valoresNFDDTO){
         this.valorVenda = valoresNFDDTO.valorVenda();
         this.valorArmazem = valoresNFDDTO.valorArmazem();
@@ -64,6 +71,8 @@ public class ValoresNFD {
         this.cadastradoPor = valoresNFDDTO.cadastradoPor();
         this.atualizadoPor = valoresNFDDTO.atualizadoPor();
         this.numeronfd = valoresNFDDTO.numeronfd();
+        this.debitadoCliente = valoresNFDDTO.debitadoCliente();
+        this.debitadoMotorista = valoresNFDDTO.debitadoMotorista();
     }
 
 

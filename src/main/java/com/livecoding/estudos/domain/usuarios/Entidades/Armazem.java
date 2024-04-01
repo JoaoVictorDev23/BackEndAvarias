@@ -19,19 +19,23 @@ public class Armazem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "armazem_id")
     private Integer armazemId;
+
     @Column(name = "armazem_nome")
     private String armazemNome;
+
     @Column(name = "armazem_filial")
     private String armazemFilial;
+
     @Column(name = "armazem_endereco")
     private String armazemEndereco;
+
     @Column(name="cadastrado_por")
     private String cadastradorPor;
 
     public Armazem(@Valid ArmazemDTO armazemDTO){
         this.armazemNome = armazemDTO.armazemNome();
-        this.armazemEndereco = armazemDTO.armazemFilial();
-        this.armazemFilial = armazemDTO.armazemEndereco();
+        this.armazemEndereco = armazemDTO.armazemEndereco();
+        this.armazemFilial = armazemDTO.armazemFilial();
     }
 
 

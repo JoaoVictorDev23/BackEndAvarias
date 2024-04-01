@@ -4,6 +4,8 @@ import com.livecoding.estudos.domain.usuarios.DTO.ChatMessageDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Table(name = "chat")
 @Entity(name = "chatmessage")
 @Getter
@@ -26,10 +28,15 @@ public class ChatMessage {
     @Column(name="user_vinculado")
     private String userVinculado;
 
+    @Column(name="datahora")
+    private LocalDateTime datahora;
+
+
 
     public ChatMessage(ChatMessageDTO chatMessageDTO){
         this.message = chatMessageDTO.message();
         this.nfdVinculada = chatMessageDTO.nfdVinculada();
+
     }
 
 

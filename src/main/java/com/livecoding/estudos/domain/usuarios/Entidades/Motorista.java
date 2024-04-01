@@ -27,15 +27,12 @@ public class Motorista {
     private String motoristaEmail;
     @Column(name="cadastrado_por")
     private String cadastradorPor;
-    @Column(name="motorista_debitado")
-    private Float motoristaDebitado;
 
 
     public Motorista(@Valid MotoristaDTO motoristaDTO) {
         this.motoristaNome = motoristaDTO.nome();
         this.motoristaCpf = motoristaDTO.cpf();
         this.motoristaEmail = motoristaDTO.email();
-        this.motoristaDebitado = motoristaDTO.debitado();
 
     }
 }

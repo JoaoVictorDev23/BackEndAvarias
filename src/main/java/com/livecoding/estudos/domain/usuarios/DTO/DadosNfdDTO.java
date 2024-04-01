@@ -19,12 +19,14 @@ public record DadosNfdDTO(
         String situacao,
         String cadastradoPor,
         String atualizadoPor,
-        Integer motivo
+        Integer motivo,
+        String status
 
         ) {
     public DadosNfdDTO(DadosNFD dadosnfd){
         this(dadosnfd.getDadosnfdId(), dadosnfd.getNumeroNfd(), dadosnfd.getNumeroNfo(),
                 dadosnfd.getFilial(),  dadosnfd.getSerie(), dadosnfd.getCte(),
-                dadosnfd.getObservacao(),dadosnfd.getSituacao(),dadosnfd.getCadastradoPor(),dadosnfd.getAtualizadoPor(),dadosnfd.getMotivo());
+                dadosnfd.getObservacao(),dadosnfd.getSituacao(),dadosnfd.getCadastradoPor(),
+                dadosnfd.getAtualizadoPor(),dadosnfd.getMotivo(), dadosnfd.getStatus());
     }
 }
