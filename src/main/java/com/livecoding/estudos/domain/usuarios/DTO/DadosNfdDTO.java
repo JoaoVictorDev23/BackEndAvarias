@@ -6,6 +6,7 @@ import com.livecoding.estudos.domain.usuarios.Entidades.Produtos;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public record DadosNfdDTO(
@@ -20,13 +21,16 @@ public record DadosNfdDTO(
         String cadastradoPor,
         String atualizadoPor,
         Integer motivo,
-        String status
+        String status,
+        LocalDate dataLocal,
+        String anexo
 
         ) {
     public DadosNfdDTO(DadosNFD dadosnfd){
         this(dadosnfd.getDadosnfdId(), dadosnfd.getNumeroNfd(), dadosnfd.getNumeroNfo(),
                 dadosnfd.getFilial(),  dadosnfd.getSerie(), dadosnfd.getCte(),
                 dadosnfd.getObservacao(),dadosnfd.getSituacao(),dadosnfd.getCadastradoPor(),
-                dadosnfd.getAtualizadoPor(),dadosnfd.getMotivo(), dadosnfd.getStatus());
+                dadosnfd.getAtualizadoPor(),dadosnfd.getMotivo(), dadosnfd.getStatus(),dadosnfd.getData(),
+                dadosnfd.getAnexo());
     }
 }
