@@ -5,7 +5,9 @@ import com.livecoding.estudos.domain.usuarios.DTO.CriarNotaFiscalDTO;
 import com.livecoding.estudos.services.ServicesInterface.NotaFiscalService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +52,20 @@ public class NotaFiscalControllers {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(notasFiscais);
+        }
+    }
+    @PostMapping("/gerar-excel")
+    public ResponseEntity<byte[]> gerarExcel(@RequestParam("nomeArquivo") String nomeArquivo) {
+        try {
+            List<CriarNotaFiscalDTO> notas = notaFiscalService.findAlls();
+            byte[] excelBytes = notaFiscalService.criarExcel(nomeArquivo, notas);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.setContentDispositionFormData("attachment", nomeArquivo + ".xlsx");
+
+            return new ResponseEntity<>(excelBytes, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 

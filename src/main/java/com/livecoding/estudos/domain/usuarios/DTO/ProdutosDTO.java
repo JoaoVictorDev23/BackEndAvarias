@@ -13,12 +13,13 @@ public record ProdutosDTO(
 
         @NotNull String numeronfd,
 
-        Integer armazemId
+        Integer armazemId,
+        Float produtoDesconto
 
 ) {
 
     public ProdutosDTO(Produtos produtos){
         this(produtos.getProdutoId(),produtos.getNomeProduto(), produtos.getValorProduto(), produtos.getQuantidadeProduto(),
-                produtos.getSituacaoProduto(), produtos.getNumeronfd(), produtos.getArmazemId());
+                produtos.getSituacaoProduto(), produtos.getNumeronfd(), produtos.getArmazemId(), produtos.getProdutoDesconto());
     }
 }

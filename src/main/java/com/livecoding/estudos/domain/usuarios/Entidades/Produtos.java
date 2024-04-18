@@ -36,6 +36,9 @@ public class Produtos {
     @Column(name = "produto_nfd")
     private String numeronfd;
 
+    @Column(name="produto_desconto")
+    private Float produtoDesconto;
+
     public Produtos(@Valid ProdutosDTO produtosDTO){
         this.nomeProduto = produtosDTO.produtoNome();
         this.valorProduto = produtosDTO.produtoValor();
@@ -43,6 +46,7 @@ public class Produtos {
         this.situacaoProduto = produtosDTO.situacaoProduto();
         this.numeronfd = produtosDTO.numeronfd();
         this.armazemId = produtosDTO.armazemId();
+        this.produtoDesconto = produtosDTO.produtoDesconto();
 
     }
 

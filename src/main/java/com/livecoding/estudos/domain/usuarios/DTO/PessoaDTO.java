@@ -13,7 +13,7 @@ public record PessoaDTO(
 
         @NotNull String cpf,
         String cadastradoPor,
-        @NotNull Float debitado
+         Float debitado
 ) {
     public PessoaDTO(Pessoa pessoa) {
         this(pessoa.getPessoaId(), pessoa.getPessoaNome(),pessoa.getPessoaCpf(),pessoa.getPessoaEmail(),pessoa.getCadastradorPor(),pessoa.getPessoaDebitado());

@@ -8,6 +8,7 @@ import com.livecoding.estudos.domain.usuarios.repositories.ProdutosRepository;
 import com.livecoding.estudos.services.ServicesInterface.ProdutoService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,4 +35,14 @@ public class ProdutosControllers {
 
         return ResponseEntity.ok(savedProdutos);
     }
+    @PutMapping("/atualizar")
+    public ResponseEntity<?> atualizarProdutos(@RequestBody List<ProdutosDTO> produtosDTOList) {
+        try {
+            List<ProdutosDTO> updatedProdutos = produtoService.atualizarOuAdicionarProdutos(produtosDTOList);
+            return ResponseEntity.ok(updatedProdutos);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar produtos: " + e.getMessage());
+        }
+    }
+
 }

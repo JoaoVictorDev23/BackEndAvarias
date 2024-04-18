@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +46,8 @@ public class ValoresNFDServiceImpl implements ValoresNfdService {
         String emailUsuario = SecurityContextHolder.getContext().getAuthentication().getName();
 
         ValoresNFD newValores = new ValoresNFD(valoresNFDDTO);
+        LocalDate dataLocal = LocalDate.now(); // Obtém a data local atual
+        newValores.setData(dataLocal);
         newValores.setCadastradoPor(emailUsuario);
         newValores.setAtualizadoPor(emailUsuario);
         valoresNFDRepository.save(newValores);
@@ -62,7 +65,7 @@ public class ValoresNFDServiceImpl implements ValoresNfdService {
             valoresNFD.setSituacaoValores("Pendente");
             valoresNFD.setArmazem(valoresNFDDTO.armazem());
             valoresNFD.setMotorista(valoresNFDDTO.motorista());
-            valoresNFD.setComprador(valoresNFDDTO.comprador());
+            valoresNFD.setPessoa(valoresNFDDTO.pessoa());
             valoresNFD.setCliente(valoresNFDDTO.cliente());
             valoresNFD.setDebitadoCliente(valoresNFDDTO.debitadoCliente());
             valoresNFD.setDebitadoMotorista(valoresNFDDTO.debitadoMotorista());

@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Table(name = "valoresnfd")
 @Entity(name = "valoresnfd")
 @Getter
@@ -36,7 +38,7 @@ public class ValoresNFD {
     private String motorista;
 
     @Column(name ="comprador_id")
-    private String comprador;
+    private String pessoa;
 
     @Column(name ="cliente_id")
     private Integer cliente;
@@ -59,13 +61,16 @@ public class ValoresNFD {
     @Column(name="debitado_motorista")
     private Float debitadoMotorista;
 
+    @Column(name="data")
+    private LocalDate data;
+
     public ValoresNFD(@Valid ValoresNFDDTO valoresNFDDTO){
         this.valorVenda = valoresNFDDTO.valorVenda();
         this.valorArmazem = valoresNFDDTO.valorArmazem();
         this.valorPrejuizo = valoresNFDDTO.valorPrejuizo();
         this.situacaoValores = valoresNFDDTO.situacaoValores();
         this.armazem = valoresNFDDTO.armazem();
-        this.comprador = valoresNFDDTO.comprador();
+        this.pessoa = valoresNFDDTO.pessoa();
         this.motorista = valoresNFDDTO.motorista();
         this.cliente = valoresNFDDTO.cliente();
         this.cadastradoPor = valoresNFDDTO.cadastradoPor();
@@ -73,6 +78,8 @@ public class ValoresNFD {
         this.numeronfd = valoresNFDDTO.numeronfd();
         this.debitadoCliente = valoresNFDDTO.debitadoCliente();
         this.debitadoMotorista = valoresNFDDTO.debitadoMotorista();
+        this.data = valoresNFDDTO.data();
+
     }
 
 

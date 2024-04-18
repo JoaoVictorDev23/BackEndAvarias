@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -24,8 +25,11 @@ public class DadosNFDServiceImpl implements DadosNFDService {
             throw new RuntimeException("Nota Fiscal de Devolução já cadastrada!");
         }
         String emailUsuario = SecurityContextHolder.getContext().getAuthentication().getName();
+        LocalDate dataLocal = LocalDate.now(); // Obtém a data local atual
+
 
         DadosNFD newDados = new DadosNFD(dadosNfdDTO);
+        newDados.setData(dataLocal);
         newDados.setAtualizadoPor(emailUsuario);
         newDados.setCadastradoPor(emailUsuario);
         dadosNFDRepository.save(newDados);
@@ -40,6 +44,8 @@ public class DadosNFDServiceImpl implements DadosNFDService {
 
             dadosNFD.setMotivo(dadosNfdDTO.motivo());
             dadosNFD.setSituacao("Pendente");
+            dadosNFD.setObservacao(dadosNfdDTO.observacao());
+            dadosNFD.setStatus(dadosNfdDTO.status());
 
 
             // Log user que Atualizou:

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Table(name = "dadosnfd")
@@ -55,7 +56,11 @@ public class DadosNFD {
     @Column(name = "status_nota")
     private String status;
 
+    @Column(name = "data")
+    private LocalDate data;
 
+    @Column(name="anexo")
+    private String anexo;
 
     public DadosNFD(@Valid DadosNfdDTO dadosNfdDTO){
         this.numeroNfd = dadosNfdDTO.numeroNfd();
@@ -69,5 +74,6 @@ public class DadosNFD {
         this.atualizadoPor = dadosNfdDTO.atualizadoPor();
         this.motivo = dadosNfdDTO.motivo();
         this.status = dadosNfdDTO.status();
+        this.anexo = dadosNfdDTO.anexo();
     }
 }

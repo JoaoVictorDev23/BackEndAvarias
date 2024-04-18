@@ -15,5 +15,7 @@ public interface NotaFiscalService {
     List<CriarNotaFiscalDTO> findAllByEmail();
 
     List<CriarNotaFiscalDTO> findAlls();
+    byte[]  criarExcel(final String nomeArquivo,  final List<CriarNotaFiscalDTO> notas);
+
 
 }

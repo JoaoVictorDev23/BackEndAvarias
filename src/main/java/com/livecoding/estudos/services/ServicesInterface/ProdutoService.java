@@ -10,6 +10,7 @@ public interface ProdutoService {
 
     List<ProdutosDTO> createProduto(List<ProdutosDTO> produtosDTOList);
     List<ProdutosDTO> getAllProdutosForNFD(String numeroNfd);
+    List<ProdutosDTO> atualizarOuAdicionarProdutos(List<ProdutosDTO> produtosDTOList);
 
 
 }

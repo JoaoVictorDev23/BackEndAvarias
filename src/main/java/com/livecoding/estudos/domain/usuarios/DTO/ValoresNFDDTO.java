@@ -5,6 +5,8 @@ import com.livecoding.estudos.domain.usuarios.Entidades.Cliente;
 import com.livecoding.estudos.domain.usuarios.Entidades.Pessoa;
 import com.livecoding.estudos.domain.usuarios.Entidades.ValoresNFD;
 
+import java.time.LocalDate;
+
 public record ValoresNFDDTO(
         Integer id,
         Float valorVenda,
@@ -14,22 +16,23 @@ public record ValoresNFDDTO(
 
         Integer armazem,
         String motorista,
-        String comprador,
+        String pessoa,
 
         Integer cliente,
         String cadastradoPor,
         String atualizadoPor,
         String numeronfd,
         Float debitadoCliente,
-        Float debitadoMotorista
+        Float debitadoMotorista,
+        LocalDate data
 
 ) {
     public ValoresNFDDTO(ValoresNFD valoresNFD){
         this(valoresNFD.getValoresNFDID(), valoresNFD.getValorVenda(), valoresNFD.getValorPrejuizo(),
-         valoresNFD.getValorArmazem(), valoresNFD.getSituacaoValores(),valoresNFD.getArmazem()
-        ,valoresNFD.getMotorista(),valoresNFD.getComprador(),valoresNFD.getCliente()
+          valoresNFD.getValorArmazem(), valoresNFD.getSituacaoValores(),valoresNFD.getArmazem()
+        , valoresNFD.getMotorista(),valoresNFD.getPessoa(),valoresNFD.getCliente()
         , valoresNFD.getCadastradoPor(), valoresNFD.getAtualizadoPor(), valoresNFD.getNumeronfd(),
-                valoresNFD.getDebitadoCliente(), valoresNFD.getDebitadoMotorista());
+          valoresNFD.getDebitadoCliente(), valoresNFD.getDebitadoMotorista(),valoresNFD.getData());
     }
 
 }

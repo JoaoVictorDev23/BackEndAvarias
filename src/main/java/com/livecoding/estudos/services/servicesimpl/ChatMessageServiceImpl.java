@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class ChatMessageServiceImpl implements ChatMessageService {
+public class    ChatMessageServiceImpl implements ChatMessageService {
 
     @Autowired
     ChatMessageRepository chatMessageRepository;
