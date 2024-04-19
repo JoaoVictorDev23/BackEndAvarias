@@ -30,7 +30,11 @@ public record ValoresNFDDTO(
     public ValoresNFDDTO(ValoresNFD valoresNFD){
         this(valoresNFD.getValoresNFDID(), valoresNFD.getValorVenda(), valoresNFD.getValorPrejuizo(),
           valoresNFD.getValorArmazem(), valoresNFD.getSituacaoValores(),valoresNFD.getArmazem()
+<<<<<<< HEAD
         , valoresNFD.getMotorista(),valoresNFD.getPessoa(),valoresNFD.getCliente()
+=======
+        , valoresNFD.getMotorista(),valoresNFD.getComprador(),valoresNFD.getCliente()
+>>>>>>> ed9e4f358ffdf9f897197655fe01ad052bec2949
         , valoresNFD.getCadastradoPor(), valoresNFD.getAtualizadoPor(), valoresNFD.getNumeronfd(),
           valoresNFD.getDebitadoCliente(), valoresNFD.getDebitadoMotorista(),valoresNFD.getData());
     }

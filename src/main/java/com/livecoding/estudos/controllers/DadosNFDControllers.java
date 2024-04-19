@@ -16,7 +16,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+<<<<<<< HEAD
 import java.io.*;
+=======
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+>>>>>>> ed9e4f358ffdf9f897197655fe01ad052bec2949
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -53,6 +60,7 @@ public class DadosNFDControllers {
         return ResponseEntity.ok().build();
     }
 
+<<<<<<< HEAD
     //Parte de Upload e Dowload de Arquivos:
 
     @Autowired
@@ -152,5 +160,63 @@ public class DadosNFDControllers {
         }
     }
 
+=======
+    @PostMapping("/upload")
+    public String uploadFile(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return "Arquivo não foi enviado";
+        }
+>>>>>>> ed9e4f358ffdf9f897197655fe01ad052bec2949
 
+        try {
+            // Criar o diretório se ele não existir
+            String uploadDir = "C://Users//joao.faria//Pictures//Teste/";
+            File dir = new File(uploadDir);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            // Salvar o arquivo na pasta desejada no servidor
+            String fileName = file.getOriginalFilename();
+            String filePath = uploadDir + fileName;
+            File dest = new File(filePath);
+            file.transferTo(dest);
+
+            return "Arquivo salvo com sucesso no servidor";
+        } catch (IOException e) {
+            return "Erro ao salvar o arquivo no servidor: " + e.getMessage();
+        }
+    }
+
+    @GetMapping("/download")
+    public ResponseEntity<Resource> downloadFile(String anexo) {
+        try {
+            // Diretório onde os arquivos estão armazenados
+            String directoryPath = "C:/Users/joao.faria/Pictures/Teste/";
+
+            // Caminho completo do arquivo
+            String filePath = directoryPath + anexo ;
+
+            // Verifica se o arquivo existe
+            File file = new File(filePath);
+            if (!file.exists()) {
+                throw new FileNotFoundException("Anexo não encontrado: " + anexo);
+            }
+
+            // Cria um recurso a partir do arquivo
+            InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+            // Define os headers de resposta
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName());
+
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .contentLength(file.length())
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .body(resource);
+        } catch (FileNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
 }
